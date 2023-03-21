@@ -48,6 +48,16 @@ nav li a {
 }
 
 .nav-active {
-  color: grey;
+  color: rgb(65, 105, 236);
+  font-weight: bold;
   transition: all .3s ease-out;
+}
+
+.menu{
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  list-style: none;
+  color: rgb(239, 240, 240);
+
 }

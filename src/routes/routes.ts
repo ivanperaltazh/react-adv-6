@@ -1,4 +1,5 @@
 import { lazy, LazyExoticComponent } from 'react';
+import { NoLazy } from '../01-lazyload/pages/NoLazy';
 // import { LazyPage1, LazyPage2, LazyPage3 } from '../01-lazyload/pages';
 // import { LazyPage1 } from '../01-lazyload/pages';
 
@@ -16,32 +17,31 @@ interface Route {
 
 // Definimos componentes que van a ser cargados bajo demanda es decir con lazy Loading
 // y reemmplazmos con estos lazy() los Component de las routes: 
-const Lazy1 = lazy(() => import(/* webpackChunkName: "LazyPage1" */ '../01-lazyload/pages/LazyPage1'));
-const Lazy2 = lazy(() => import(/* webpackChunkName: "LazyPage2" */ '../01-lazyload/pages/LazyPage2'));
-const Lazy3 = lazy(() => import(/* webpackChunkName: "LazyPage3" */ '../01-lazyload/pages/LazyPage3'));
-// ! NOTA IMPORTANTE: para carga los elementos por lazy loding estos tienen que estar exportados por defecto
+const LazyLayout = lazy(() => import(/* webpackChunkName: "LazyLayout" */ '../01-lazyload/layout/LazyLayout'));
+// const Lazy2 = lazy(() => import(/* webpackChunkName: "LazyPage2" */ '../01-lazyload/pages/LazyPage2'));
+// const Lazy3 = lazy(() => import(/* webpackChunkName: "LazyPage3" */ '../01-lazyload/pages/LazyPage3'));
+
+// ! NOTA IMPORTANTE: al hacer import { LazyLayout } from './../01-lazyload/layout/LazyLayout'; debe esta exportado por defecto
+// al carga los elementosimport { NoLazy } from './../01-lazyload/pages/NoLazy';
+
 /* webpackChunkName: "LazyPage1" -> sirva para cambiar el nombre a los chunk bas con poner ese comentario
    Que es simplemente el nombre que pararece en consola cuando se carga un modulo por lazy loading cuando se usa webpack
    y sirve para desarrollo para idificar cara modulo lazy loading y ver tiempo de cargar, tmaño etc.*/
 
-   
+
+
+// '/lazyload/* : significa todo lo que venga con el path "/lazyload" pasara por este path
 export const routes: Route[] = [
     {
-        to: '/lazy1',
-        path: 'lazy1',
-        Component: Lazy1, // Component con mayuscula la primera porque es componente y van con mayuscula
-        name: 'Lazy-1' // nombre para el link
+        path: '/lazyload/*',
+        to: '/lazyload',
+        Component: LazyLayout, // Component con mayuscula la primera porque es componente y van con mayuscula
+        name: 'LazyLayout' // nombre para el link
     },
     {
-        to: '/lazy2',
-        path: 'lazy2',
-        Component: Lazy2, //TIP : PARA SABER EL TIPO DE DATO QUE ES COMPONEN PONER EL CURSOR ENCIMA Y COPIARLO  () => JSX.Element
-        name: 'Lazy-2'
-    },
-    {
-        to: '/lazy3',
-        path: 'lazy3',
-        Component: Lazy3,
-        name: 'Lazy-3'
+        path: 'no-lazy',
+        to: '/no-lazy',
+        Component: NoLazy, // Este componente se cargara sin lazy load
+        name: 'No Lazy'
     },
 ];
